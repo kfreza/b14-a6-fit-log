@@ -4,20 +4,20 @@
 
 FitLog is a dark, no-nonsense gym companion. Browse a library of twelve lifts, open any one for specs and step-by-step instructions, lock up to five into today's plan, and watch your minutes and calories add up.
 
-**Live site:** _add your deployment URL_
+**Live site:** https://b14-a6-fit-log-pi.vercel.app/
 
 ---
 
 ## 🛠️ Technologies
 
-| Technology | Purpose |
-| --- | --- |
-| [Next.js 16](https://nextjs.org) (App Router) | Routing, server rendering, image optimization |
-| [React 19](https://react.dev) | UI and client state (Context API) |
-| [TypeScript](https://www.typescriptlang.org) | Type safety across API data and components |
-| [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling and responsive layout |
-| [DaisyUI 5](https://daisyui.com) | Custom `fitlog` theme, buttons, tabs, dropdown, toast, skeleton and loading components |
-| [React Icons](https://react-icons.github.io/react-icons) | UI icons (arrows, check, info, refresh) |
+| Technology                                               | Purpose                                                                                |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [Next.js 16](https://nextjs.org) (App Router)            | Routing, server rendering, image optimization                                          |
+| [React 19](https://react.dev)                            | UI and client state (Context API)                                                      |
+| [TypeScript](https://www.typescriptlang.org)             | Type safety across API data and components                                             |
+| [Tailwind CSS v4](https://tailwindcss.com)               | Utility-first styling and responsive layout                                            |
+| [DaisyUI 5](https://daisyui.com)                         | Custom `fitlog` theme, buttons, tabs, dropdown, toast, skeleton and loading components |
+| [React Icons](https://react-icons.github.io/react-icons) | UI icons (arrows, check, info, refresh)                                                |
 
 Data comes from the FitLog API: `https://api.abcz.workers.dev/api/fitlog`.
 
