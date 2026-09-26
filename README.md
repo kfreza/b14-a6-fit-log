@@ -17,7 +17,7 @@ FitLog is a dark, no-nonsense gym companion. Browse a library of twelve lifts, o
 | [TypeScript](https://www.typescriptlang.org)             | Type safety across API data and components                                             |
 | [Tailwind CSS v4](https://tailwindcss.com)               | Utility-first styling and responsive layout                                            |
 | [DaisyUI 5](https://daisyui.com)                         | Custom `fitlog` theme, buttons, tabs, dropdown, toast, skeleton and loading components |
-| [React Icons](https://react-icons.github.io/react-icons) | UI icons (arrows, check, info, refresh)                                                |
+| [React Icons](https://react-icons.github.io/react-icons) | UI icons (arrows, check, info, refresh, search)                                        |
 
 Data comes from the FitLog API: `https://api.abcz.workers.dev/api/fitlog`.
 
@@ -31,9 +31,10 @@ Data comes from the FitLog API: `https://api.abcz.workers.dev/api/fitlog`.
 4. **Live plan metrics.** The My Plan page totals exercises, minutes and calories as you add, finish or remove lifts.
 5. **Mark as done and remove.** Each planned lift can be completed or removed, and both actions show a toast.
 6. **Sort by Duration, Calories or Rating.** A dropdown re-sorts the current list.
-7. **Saved between visits.** The plan and saved lists are stored in `localStorage`, so they survive a page reload.
-8. **Five-lift cap.** "Add to today's plan" is disabled when five unfinished lifts are already planned.
-9. **Responsive layout, 404 page and error handling.** Works on mobile, tablet and desktop. Unknown routes and unknown workout IDs show a 404 page.
+7. **Search by name or tag.** Filter the library, Today's Plan or Saved list as you type, for example "squat" or "core".
+8. **Saved between visits.** The plan and saved lists are stored in `localStorage`, so they survive a page reload.
+9. **Five-lift cap.** "Add to today's plan" is disabled when five unfinished lifts are already planned.
+10. **Responsive layout, 404 page and error handling.** Works on mobile, tablet and desktop. Unknown routes and unknown workout IDs show a 404 page.
 
 ---
 

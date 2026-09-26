@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { type ListName, usePlan } from "@/components/providers/PlanProvider";
 import { useToast } from "@/components/providers/ToastProvider";
+import SearchInput, { NoMatches } from "@/components/common/SearchInput";
+import { matchesQuery } from "@/lib/search";
 import MetricsSummary from "./MetricsSummary";
 import PlanCard from "./PlanCard";
 import SortDropdown, { type SortKey, sortWorkouts } from "./SortDropdown";
@@ -18,10 +20,12 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
   const toast = useToast();
   const [tab, setTab] = useState<ListName>(initialTab);
   const [sortKey, setSortKey] = useState<SortKey>("duration");
+  const [query, setQuery] = useState("");
 
+  const list = tab === "plan" ? plan : saved;
   const items = useMemo(
-    () => sortWorkouts(tab === "plan" ? plan : saved, sortKey),
-    [tab, plan, saved, sortKey],
+    () => sortWorkouts(list.filter((w) => matchesQuery(w, query)), sortKey),
+    [list, query, sortKey],
   );
 
   return (
@@ -42,7 +46,7 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
                 onClick={() => setTab(t.key)}
                 className={`tab h-auto rounded-lg px-4 py-1.5 text-xs leading-4 ${
                   active
-                    ? "tab-active border border-[#2b303d] !bg-[#1f242d] font-bold text-white shadow-sm"
+                    ? "tab-active border border-[#2b303d] bg-[#1f242d]! font-bold text-white shadow-sm"
                     : "border border-transparent font-normal text-subtle hover:text-white"
                 }`}
               >
@@ -53,7 +57,16 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
           })}
         </div>
 
-        <SortDropdown value={sortKey} onChange={setSortKey} />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <SearchInput
+            value={query}
+            onChange={setQuery}
+            label={`Search ${tab === "plan" ? "today's plan" : "saved lifts"}`}
+            disabled={!hydrated}
+            className="w-full sm:w-56"
+          />
+          <SortDropdown value={sortKey} onChange={setSortKey} />
+        </div>
       </div>
 
       <section aria-live="polite" className="flex flex-col gap-4">
@@ -62,8 +75,10 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
             <span className="loading loading-spinner loading-md text-lime" aria-hidden />
             Loading workouts…
           </div>
-        ) : items.length === 0 ? (
+        ) : list.length === 0 ? (
           <EmptyState />
+        ) : items.length === 0 ? (
+          <NoMatches query={query} onClear={() => setQuery("")} />
         ) : (
           items.map((item) => (
             <PlanCard
