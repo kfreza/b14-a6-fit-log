@@ -24,7 +24,11 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
 
   const list = tab === "plan" ? plan : saved;
   const items = useMemo(
-    () => sortWorkouts(list.filter((w) => matchesQuery(w, query)), sortKey),
+    () =>
+      sortWorkouts(
+        list.filter((w) => matchesQuery(w, query)),
+        sortKey,
+      ),
     [list, query, sortKey],
   );
 
@@ -33,7 +37,11 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
       <MetricsSummary items={plan} />
 
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-        <div role="tablist" aria-label="Plan lists" className="tabs tabs-box w-fit gap-1 rounded-xl border border-[#232732] bg-[#151921] p-[5px]">
+        <div
+          role="tablist"
+          aria-label="Plan lists"
+          className="tabs tabs-box w-fit gap-1 rounded-xl border border-[#232732] bg-[#151921] p-1.25"
+        >
           {TABS.map((t) => {
             const active = tab === t.key;
             const count = t.key === "plan" ? plan.length : saved.length;
@@ -51,7 +59,11 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
                 }`}
               >
                 {t.label}
-                {hydrated && count > 0 && <span className="ml-1.5 text-[11px] text-subtle">({count})</span>}
+                {hydrated && count > 0 && (
+                  <span className="ml-1.5 text-[11px] text-subtle">
+                    ({count})
+                  </span>
+                )}
               </button>
             );
           })}
@@ -71,8 +83,14 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
 
       <section aria-live="polite" className="flex flex-col gap-4">
         {!hydrated ? (
-          <div role="status" className="flex items-center justify-center gap-3 rounded-2xl border border-[#232732] bg-[#14171e] py-16 text-sm text-subtle">
-            <span className="loading loading-spinner loading-md text-lime" aria-hidden />
+          <div
+            role="status"
+            className="flex items-center justify-center gap-3 rounded-2xl border border-[#232732] bg-[#14171e] py-16 text-sm text-subtle"
+          >
+            <span
+              className="loading loading-spinner loading-md text-lime"
+              aria-hidden
+            />
             Loading workouts…
           </div>
         ) : list.length === 0 ? (
@@ -91,7 +109,10 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
               }}
               onRemove={() => {
                 remove(tab, item.id);
-                toast(`${item.name} removed from ${tab === "plan" ? "today's plan" : "saved"}`, "info");
+                toast(
+                  `${item.name} removed from ${tab === "plan" ? "today's plan" : "saved"}`,
+                  "info",
+                );
               }}
             />
           ))
@@ -103,7 +124,7 @@ export default function MyPlanView({ initialTab }: { initialTab: ListName }) {
 
 function EmptyState() {
   return (
-    <div className="flex min-h-[300px] flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-[#111317]/50 px-4 py-20 text-center">
+    <div className="flex min-h-75 flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-[#111317]/50 px-4 py-20 text-center">
       <h2 className="pb-2 font-display text-xl font-bold uppercase leading-5 tracking-[0.7px] text-white">
         Nothing here yet
       </h2>
