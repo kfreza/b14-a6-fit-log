@@ -3,8 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import { getWorkout } from "@/lib/api";
+import { getWorkout, getWorkouts } from "@/lib/api";
 import DetailActions from "@/components/workouts/DetailActions";
+
+export async function generateStaticParams() {
+  const workouts = await getWorkouts();
+  return workouts.map((w) => ({ id: String(w.id) }));
+}
 
 export async function generateMetadata(props: PageProps<"/workouts/[id]">): Promise<Metadata> {
   const { id } = await props.params;
